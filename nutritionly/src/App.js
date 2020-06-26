@@ -6,6 +6,7 @@ import axios from "axios";
 import FoodDisplay from "./components/FoodDisplay"
 import FoodEdit from "./components/FoodEdit"
 import DeleteFood from "./components/DeleteFood"
+import MakeFood from "./components/MakeFood"
 
 class App extends Component {
   constructor(props){
@@ -50,7 +51,18 @@ class App extends Component {
       this.setState({foodItems: res.data})
     })
     .catch(err =>{
-      alert(err)
+      alert(err);
+    })
+  }
+
+  makeFood = (name, calories) =>{
+    console.log("Creating new meal");
+    axios.post("/api/food", {name, calories})
+    .then(res =>{
+      this.setState({foodItems: res.data})
+    })
+    .catch(err =>{
+      alert(err);
     })
   }
 
@@ -82,6 +94,10 @@ class App extends Component {
 
         <section className="user-area">
 
+        </section>
+        <section className="food-input">
+          <h2>New Food</h2>
+          <MakeFood makeFood={this.makeFood} />
         </section>
       </div>
     );
