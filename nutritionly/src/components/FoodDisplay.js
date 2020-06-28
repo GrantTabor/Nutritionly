@@ -1,14 +1,25 @@
-import React from "react";
+import React, {Component} from "react";
 import FoodEdit from "./FoodEdit"
 import DeleteFood from "./DeleteFood";
-export default function FoodDisplay(props){
-    return (
-    <div className="food-item">
-        <span>{props.name} </span>
-        <span>{`Calories: ${props.calories}`} </span>
-        <span>{`Carbs: ${props.carbs} Fat: ${props.fat} Protein: ${props.protein}`}</span>
-        <FoodEdit editFood={props.editFood} id={props.id}/>
-        <DeleteFood deleteFood={props.deleteFood} id={props.id} name={props.name} calories={props.calories}/>
-    </div>
-    )
+export default class FoodDisplay extends Component {
+    constructor(props){
+        super(props)
+    }
+    render(){
+        const {id, name, calories, carbs, fat, protein} = this.props.foodItem
+        return (
+            <div className="food-item" >
+                <span>{name} </span>
+                <span>{`Calories: ${calories}`} </span>
+               
+                <FoodEdit editFood={this.props.editFood} id={id}/>
+                <span>
+                    <button className="add-button" onClick={()=> {this.props.addToUserMeals(this.props.foodItem)}}>Add</button>
+                    <DeleteFood deleteFood={this.props.deleteFood} id={id} name={name} calories={calories}/>
+                </span>
+                
+            </div>
+            )
+    }
+  
 }

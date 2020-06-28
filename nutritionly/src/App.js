@@ -3,6 +3,7 @@ import logo from './logo.svg';
 import './App.css';
 import axios from "axios";
 
+import UserDisplay from "./components/UserDisplay"
 import FoodDisplay from "./components/FoodDisplay"
 import FoodEdit from "./components/FoodEdit"
 import DeleteFood from "./components/DeleteFood"
@@ -13,7 +14,8 @@ class App extends Component {
     super(props);
     this.state = {
       foodItems: [],
-      userFood: []
+      userFood: [],
+      totalCalories: 0
     }
   }
 
@@ -35,6 +37,9 @@ class App extends Component {
 
   editFood = (id, name, calories) =>{
     console.log("updating")
+    if (calories === undefined){
+      calories = 0;
+    }
     axios.put(`/api/food/${id}`, {name, calories})
     .then(res => {
       this.setState({foodItems: res.data})
@@ -57,6 +62,9 @@ class App extends Component {
 
   makeFood = (name, calories) =>{
     console.log("Creating new meal");
+    if(calories === null){
+      calories = 0;
+    }
     axios.post("/api/food", {name, calories})
     .then(res =>{
       this.setState({foodItems: res.data})
@@ -66,39 +74,68 @@ class App extends Component {
     })
   }
 
+  addToUserMeals = (food, id) =>{
+    let newFood = this.state.userFood;
+    if (!this.state.userFood.includes(food)){
+      newFood.push(food)
+      this.setState({totalCalories: this.state.totalCalories + +food.calories})
+    }
+    
+    this.setState({userFood: newFood})
+    console.log(this.state.userFood)
+  }
+  removeFromUserMeals = (food) =>{
+    let newFood = this.state.userFood;
+    for(let i = 0; i < newFood.length; i++){
+      if(food == newFood[i]){
+        newFood.splice(i, 1);
+        this.setState({totalCalories: this.state.totalCalories - +food.calories})
+      }
+    }
+    this.setState({UserFood: newFood})
+    console.log("removed")
+  }
   render(){
-    console.log(this.state.foodItems)
-  
+
     return (
       <div className="App">
         <header>
           Nutritionly
         </header>
-        <section className="food-area">
-        {
-          this.state.foodItems.map((object) =>(    
-            <FoodDisplay id={object.id} 
-            key={object.id} 
-            name={object.name} 
-            calories={object.calories} 
-            carbs={object.carbs} 
-            protein={object.protein} 
-            fat={object.fat}
-            editFood={this.editFood}
-            deleteFood={this.deleteFood}
-            />
-        ))
-          }
-        </section>
+
+        <section className="main">
+          <section className="food-area"> Food Choices
+          {
+            this.state.foodItems.map((object) =>(   
+              <FoodDisplay id={object.id} 
+              key={object.id} 
+              foodItem={object}
+              editFood={this.editFood}
+              deleteFood={this.deleteFood}
+              addToUserMeals ={this.addToUserMeals}
+              />
+          ))
+            }
+          </section>
 
 
-        <section className="user-area">
-
+          <section className="user-area">
+            <h2>User</h2>
+              {this.state.userFood.map((object) =>(
+                <UserDisplay id={object.id} 
+                key={object.id}
+                foodItem={object}
+                removeFromUserMeals ={this.removeFromUserMeals}
+                />
+              ))}
+              <span>Total Calories: {this.state.totalCalories}</span>
+          </section>
+          <section className="food-input">
+            <h2>New Food</h2>
+            <MakeFood makeFood={this.makeFood} />
+          </section>
         </section>
-        <section className="food-input">
-          <h2>New Food</h2>
-          <MakeFood makeFood={this.makeFood} />
-        </section>
+        
       </div>
     );
   }

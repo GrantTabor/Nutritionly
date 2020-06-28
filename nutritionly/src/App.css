@@ -1,38 +1,50 @@
 .App {
   text-align: center;
+
+}
+.main{
+  display: flex;
+  flex-direction: row;
+  align-items: space-evenly;
+  justify-content: space-evenly;
+
+
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+header {
+  display: flex;
+  justify-content: start;
 }
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.food-area{
+  width: 33%;
 }
+.user-area{
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+  width: 33%;
+}
+.food-item{
+  margin-top: 10px;
+  background-color: #2D82B7;
+  margin-bottom: 10px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  border-radius: 5px;
+} 
+.user-area .food-item :hover{
+  background-color: #EB8A90;
 }
 
-.App-link {
-  color: #61dafb;
+.delete-button{
+  background-color: red;
+  border: none;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.food-input{
+  width: 33%;
+}
+
+.edit-food input{
+  width: 20px;
 }
