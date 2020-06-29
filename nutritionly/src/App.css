@@ -13,8 +13,6 @@
   flex-direction: row;
   align-items: space-evenly;
   justify-content: space-evenly;
-
-
 }
 
 header {
@@ -34,7 +32,6 @@ header {
 .user-area{
   width: 33%;
   background-color: #07004D;
-  height: 80vh;
   border-radius: 20px;
   position: flex;
   text-align: center;
@@ -64,9 +61,12 @@ header {
   width: 50%;
   margin: 0 auto;
   margin-top: 20px;
+  margin-bottom: 20px;
 } 
 
-
+.food-buttons{
+  margin-left: 20px;
+}
 
 .delete-button{
   background-color: red;

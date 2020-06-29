@@ -37,7 +37,7 @@ class App extends Component {
 
   editFood = (id, name, calories) =>{
     console.log("updating")
-    if (calories === undefined){
+    if (calories === null){
       calories = 0;
     }
     axios.put(`/api/food/${id}`, {name, calories})

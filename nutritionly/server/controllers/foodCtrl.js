@@ -12,7 +12,7 @@ module.exports = {
         res.status(200).send(food);
     },
     addFood: (req, res) =>{
-        const {name, calories, carbs, protein, fat} = req.body;
+        const {name, calories} = req.body;
         food.push({name, calories, carbs, protein, fat, id});
         id = id +1;
         res.status(200).send(food);
