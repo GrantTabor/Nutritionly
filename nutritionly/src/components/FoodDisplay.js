@@ -12,13 +12,13 @@ export default class FoodDisplay extends Component {
                 <div className="food-info">
                     <p>{name} </p>
                     <p>{`Calories: ${calories}`} </p>
+                    <span className="macro-nutrients">{`Protein: ${protein} Fat: ${fat} Carbs: ${carbs}`}</span>
                 </div>
                 
                <div className="food-buttons">
-               <DeleteFood deleteFood={this.props.deleteFood} id={id} name={name} calories={calories} className="delete-button"/>
-               <FoodEdit editFood={this.props.editFood} id={id}/>
-                <p><button className="add-button" onClick={()=> {this.props.addToUserMeals(this.props.foodItem)}}>Add</button></p>
-                
+                    <DeleteFood deleteFood={this.props.deleteFood} id={id}  className="delete-button"/>
+                    <FoodEdit editFood={this.props.editFood} id={id} name={name} calories={calories} protein={protein} fat={fat} carbs={carbs}/>
+                    <p><button className="add-button" onClick={()=> {this.props.addToUserMeals(this.props.foodItem)}}>Add</button></p>
                </div>
                 
                 

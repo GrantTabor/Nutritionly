@@ -11,8 +11,11 @@ export default class UserDisplay extends Component {
         
         return (
             <div className="food-item" onClick={()=> this.props.removeFromUserMeals(this.props.foodItem)}>
-                <span>{name} </span>
-                <span>{`Calories: ${calories}`} </span>
+                <div className="food-info">
+                    <p>{name} </p>
+                    <p>{`Calories: ${calories}`} </p>
+                    <span className="macro-nutrients">{`Protein: ${protein} Fat: ${fat} Carbs: ${carbs}`}</span>
+                </div>
                 
             </div>
             )

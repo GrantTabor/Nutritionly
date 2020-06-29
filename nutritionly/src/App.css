@@ -33,20 +33,23 @@ header {
   width: 33%;
   background-color: #07004D;
   border-radius: 20px;
-  position: flex;
-  text-align: center;
+  display: flex;
+  flex-direction: column;
 }
 .total-calories{
-  color: red;
+  color: #f4a261;
 
   bottom: 0px;
   text-align: center;
 
 }
 
+
 .user-food :hover{
   background-color: #e63946;
 }
+
+
 
 .food-item{
   margin-top: 10px;
@@ -63,6 +66,12 @@ header {
   margin-top: 20px;
   margin-bottom: 20px;
 } 
+.macro-nutrients{
+  font-size: small;
+}
+
+
+
 
 .food-buttons{
   margin-left: 20px;
@@ -80,8 +89,14 @@ header {
 
 }
 
+
+
 .edit-food input{
   width: 80%;
+}
+
+.edit-menu .macro-input{
+  width: 10%;
 }
 
 footer{

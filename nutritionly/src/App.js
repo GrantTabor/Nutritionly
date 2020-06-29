@@ -15,7 +15,10 @@ class App extends Component {
     this.state = {
       foodItems: [],
       userFood: [],
-      totalCalories: 0
+      totalCalories: 0,
+      totalProtein: 0,
+      totalFat: 0,
+      totalCarbs: 0
     }
   }
 
@@ -35,12 +38,21 @@ class App extends Component {
   }
 
 
-  editFood = (id, name, calories) =>{
+  editFood = (id, name, calories, protein, fat, carbs) =>{
     console.log("updating")
-    if (calories === null){
+    if (calories === ""){
       calories = 0;
     }
-    axios.put(`/api/food/${id}`, {name, calories})
+    if(protein === ""){
+      protein = 0;
+    }
+    if(fat === ""){
+      fat = 0;
+    }
+    if(carbs === ""){
+      carbs = 0;
+    }
+    axios.put(`/api/food/${id}`, {name, calories, protein, fat, carbs})
     .then(res => {
       this.setState({foodItems: res.data})
     })
@@ -60,12 +72,21 @@ class App extends Component {
     })
   }
 
-  makeFood = (name, calories) =>{
+  makeFood = (name, calories, protein, fat, carbs) =>{
     console.log("Creating new meal");
-    if(calories === null){
+    if(calories === ""){
       calories = 0;
     }
-    axios.post("/api/food", {name, calories})
+    if(protein === ""){
+      protein = 0;
+    }
+    if(fat === ""){
+      fat = 0;
+    }
+    if(carbs === ""){
+      carbs = 0;
+    }
+    axios.post("/api/food", {name, calories, protein, fat, carbs})
     .then(res =>{
       this.setState({foodItems: res.data})
     })
@@ -74,11 +95,16 @@ class App extends Component {
     })
   }
 
-  addToUserMeals = (food, id) =>{
+  addToUserMeals = (food) =>{
     let newFood = this.state.userFood;
     if (!this.state.userFood.includes(food)){
       newFood.push(food)
-      this.setState({totalCalories: this.state.totalCalories + +food.calories})
+      this.setState({
+        totalCalories: this.state.totalCalories + +food.calories, 
+        totalProtein: this.state.totalProtein + +food.protein,
+        totalFat: this.state.totalFat + +food.fat,
+        totalCarbs: this.state.totalCarbs + +food.carbs
+      })
     }
     
     this.setState({userFood: newFood})
@@ -89,7 +115,12 @@ class App extends Component {
     for(let i = 0; i < newFood.length; i++){
       if(food == newFood[i]){
         newFood.splice(i, 1);
-        this.setState({totalCalories: this.state.totalCalories - +food.calories})
+        this.setState({
+          totalCalories: this.state.totalCalories - +food.calories, 
+          totalProtein: this.state.totalProtein - +food.protein,
+          totalFat: this.state.totalFat - +food.fat,
+          totalCarbs: this.state.totalCarbs - +food.carbs
+        })
       }
     }
     this.setState({UserFood: newFood})
@@ -122,6 +153,7 @@ class App extends Component {
           <section className="user-area">
             <h2>Today's Meals</h2>
             <span className="total-calories">Total Calories: {this.state.totalCalories}</span>
+            <span className="total-calories">{`Protein: ${this.state.totalProtein} Fat: ${this.state.totalFat} Carbs: ${this.state.totalCarbs}`}</span>
             <div className="user-food">
               {this.state.userFood.map((object) =>(
                   <UserDisplay id={object.id} 
