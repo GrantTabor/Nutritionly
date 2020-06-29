@@ -2,9 +2,6 @@ let food = [
     {
         name: "Pizza",
         calories: 1000,
-        carbs: null,
-        protein: null,
-        fat: null,
         id: 0
     }
 ]
@@ -17,7 +14,7 @@ module.exports = {
     addFood: (req, res) =>{
         const {name, calories, carbs, protein, fat} = req.body;
         food.push({name, calories, carbs, protein, fat, id});
-        id +=1;
+        id = id +1;
         res.status(200).send(food);
     },
     editFood: (req, res) =>{ //maybe change this into edit individual elements?
@@ -32,9 +29,10 @@ module.exports = {
         res.status(200).send(food);
     },
     deleteFood: (req, res) => {
+
         const deleteId = req.params.id;
-        const foodId = food.findIndex(foodItem => foodItem.id == deleteId );
-        food.splice(foodId, 1);
+        const foodIndex = food.findIndex(foodItem => foodItem.id == deleteId );
+        food.splice(foodIndex, 1);
 
         res.status(200).send(food);
     }

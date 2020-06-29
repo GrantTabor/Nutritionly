@@ -1,6 +1,12 @@
+
 .App {
   text-align: center;
-
+  background-color: #f1faee;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  color: white;
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
 }
 .main{
   display: flex;
@@ -12,39 +18,74 @@
 }
 
 header {
+  margin-left: 50px;
   display: flex;
   justify-content: start;
+  color: #07004D;
+  font-size: 50px;
 }
 .food-area{
   width: 33%;
-}
-.user-area{
-
-  width: 33%;
-}
-.food-item{
-  margin-top: 10px;
-  background-color: #2D82B7;
-  margin-bottom: 10px;
+  background-color: #457b9d;
+  border-radius: 20px;
   display: flex;
   flex-direction: column;
+}
+.user-area{
+  width: 33%;
+  background-color: #07004D;
+  height: 80vh;
+  border-radius: 20px;
+  position: flex;
+  text-align: center;
+}
+.total-calories{
+  color: red;
+
+  bottom: 0px;
+  text-align: center;
+
+}
+
+.user-food :hover{
+  background-color: #e63946;
+}
+
+.food-item{
+  margin-top: 10px;
+  background-color: #a8dadc;
+  color: black;
+  margin-bottom: 10px;
+  display: flex;
+  flex-direction: row;
   align-items: center;
   justify-content: center;
   border-radius: 5px;
+  width: 50%;
+  margin: 0 auto;
+  margin-top: 20px;
 } 
-.user-area .food-item :hover{
-  background-color: #EB8A90;
-}
+
+
 
 .delete-button{
   background-color: red;
-  border: none;
+  margin-bottom: 10px;
 }
 
 .food-input{
   width: 33%;
+  background-color: #2a9d8f;
+  border-radius: 20px;
+
 }
 
 .edit-food input{
-  width: 20px;
+  width: 80%;
+}
+
+footer{
+  color: #07004D;
+  text-align: end;
+  margin-right: 20px;
 }

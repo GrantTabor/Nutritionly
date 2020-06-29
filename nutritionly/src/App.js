@@ -50,7 +50,7 @@ class App extends Component {
   }
 
   deleteFood = (id) =>{
-    console.log("deleting");
+    console.log("deleting " + id);
     axios.delete(`/api/food/:${id}`)
     .then(res =>{
       this.setState({foodItems: res.data})
@@ -96,7 +96,7 @@ class App extends Component {
     console.log("removed")
   }
   render(){
-
+    console.log(this.state.foodItems)
     return (
       <div className="App">
         <header>
@@ -104,7 +104,8 @@ class App extends Component {
         </header>
 
         <section className="main">
-          <section className="food-area"> Food Choices
+          <section className="food-area"> 
+          <h2>Food Choices</h2>
           {
             this.state.foodItems.map((object) =>(   
               <FoodDisplay id={object.id} 
@@ -118,24 +119,31 @@ class App extends Component {
             }
           </section>
 
-
           <section className="user-area">
-            <h2>User</h2>
+            <h2>Today's Meals</h2>
+            <span className="total-calories">Total Calories: {this.state.totalCalories}</span>
+            <div className="user-food">
               {this.state.userFood.map((object) =>(
-                <UserDisplay id={object.id} 
-                key={object.id}
-                foodItem={object}
-                removeFromUserMeals ={this.removeFromUserMeals}
-                />
-              ))}
-              <span>Total Calories: {this.state.totalCalories}</span>
+                  <UserDisplay id={object.id} 
+                  key={object.id}
+                  foodItem={object}
+                  removeFromUserMeals ={this.removeFromUserMeals}
+                  />
+                ))}
+            </div>
+             
           </section>
+
           <section className="food-input">
             <h2>New Food</h2>
             <MakeFood makeFood={this.makeFood} />
           </section>
         </section>
         
+        <footer>
+          Grant Tabor 2020
+        </footer>
+
       </div>
     );
   }
