@@ -51,7 +51,7 @@ class App extends Component {
 
   deleteFood = (id) =>{
     console.log("deleting " + id);
-    axios.delete(`/api/food/:${id}`)
+    axios.delete(`/api/food/${id}`)
     .then(res =>{
       this.setState({foodItems: res.data})
     })
